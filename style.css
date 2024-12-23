@@ -17,6 +17,18 @@ body{
   align-items: center;
   justify-content: center;
 }
+
+.titulo {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: var(--bg-color);
+  color: var(--primary);
+  text-align: center;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
 .container {
   height: 100vh;
   display: grid;
