@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="titulo">
-        <h3>Já clicou? Não vejo motivos para clicar novamente, né?</h3>
+        <h3>Clique na Cartinha!</h3>
     </div>
     
     <div class="container">
@@ -17,10 +17,9 @@
             <div class="envelope">
                 <div class="letter">
                     <div class="text">
-                        <strong>Abriu novamente? Você sabe que eu te amo bobona</strong>
+                        <strong>Eu te amo amor</strong>
                         <p>
-                            o botão ainda continua escondido, mas o quanto eu te amo não, falta 8 dias para terminar o ano
-                            e quero passar bem ao seu lado, mesmo talvez distante, vou fazer o maximo por nós mo ♥️  botão continua ai em algum lugar...
+                            o botão ta visivel, caso bugar só abrir dnv a pagina até ir!!
                         </p>
                     </div>
                 </div>
@@ -28,11 +27,83 @@
             <div class="heart"></div>
         </div>
     </div>
+    <button id="hiddenButton" style="position: absolute; display: none;">oi</button>
+
     <script>
         const envelope = document.querySelector('.envelope-wrapper');
         envelope.addEventListener('click', () => {
             envelope.classList.toggle('flap');
         });
+
+       
+    const hiddenButton = document.getElementById('hiddenButton');
+    let clickCount = 0;
+
+    function getRandomPosition() {
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        const buttonWidth = hiddenButton.offsetWidth;
+        const buttonHeight = hiddenButton.offsetHeight;
+
+        const randomX = Math.random() * (windowWidth - buttonWidth);
+        const randomY = Math.random() * (windowHeight - buttonHeight);
+
+        return { x: randomX, y: randomY };
+    }
+
+    function moveButton() {
+        const { x, y } = getRandomPosition();
+        hiddenButton.style.left = `${x}px`;
+        hiddenButton.style.top = `${y}px`;
+    }
+
+    hiddenButton.addEventListener('click', () => {
+        clickCount++;
+        if (clickCount < 3) {
+            hiddenButton.style.display = 'none';
+            setTimeout(() => {
+                moveButton();
+                hiddenButton.style.display = 'block';
+            }, 300); // Tempo para sumir e reaparecer
+        } else {
+            // Redirecionar para a próxima página
+            window.location.href = "./Flowers-HTML-CSS-main/flower.html"; // Substitua pelo URL da próxima página
+        }
+    });
+
+    // Inicialização: mostra o botão escondido pela primeira vez
+    document.body.addEventListener('click', () => {
+        if (!hiddenButton.style.display || hiddenButton.style.display === 'none') {
+            moveButton();
+            hiddenButton.style.display = 'block';
+        }
+    });
+
+    hiddenButton.addEventListener('mouseover', () => {
+    for (let i = 0; i < 5; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heartEffect');
+        
+        const size = Math.random() * 10 + 10; // Tamanho aleatório
+        const x = Math.random() * hiddenButton.offsetWidth - size / 2;
+        const y = Math.random() * hiddenButton.offsetHeight - size / 2;
+
+        heart.style.width = `${size}px`;
+        heart.style.height = `${size}px`;
+        heart.style.left = `${x}px`;
+        heart.style.top = `${y}px`;
+        heart.style.animationDelay = `${Math.random() * 0.5}s`;
+
+        hiddenButton.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 1000);
+    }
+});
+
+
+
     </script>
 </body>
 </html>

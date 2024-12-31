@@ -130,3 +130,84 @@ body{
   transform: rotate(90deg);
   transition-delay: 0.4s;
 }
+
+#hiddenButton {
+  position: absolute;
+  display: none;
+  padding: 10px 20px;
+  background: var(--bg-color);
+  border: 2px solid #fff;
+  border-radius: 20px;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+}
+
+#hiddenButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+#hiddenButton::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+#hiddenButton:hover::after {
+  opacity: 1;
+}
+
+@keyframes floatHearts {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.heartEffect {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: red;
+  transform: rotate(45deg);
+  animation: floatHearts 1s ease-in-out;
+  opacity: 0;
+}
+
+.heartEffect::before,
+.heartEffect::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: red;
+  border-radius: 50%;
+}
+
+.heartEffect::before {
+  top: -7.5px;
+  left: 0;
+}
+
+.heartEffect::after {
+  left: -7.5px;
+  top: 0;
+}
